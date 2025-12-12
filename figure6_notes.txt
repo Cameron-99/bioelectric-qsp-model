@@ -1,0 +1,15 @@
+“An evolutionary search over bioelectric-model parameters can find multiple distinct parameter sets that all drive a simple multicell system into the same stable voltage state, illustrating degeneracy in how a tissue-level bioelectric goal can be achieved.”
+
+
+
+    What the fitness curve shows (fitness quickly goes to ~0 and stays there).
+
+    What the pattern plot shows (baseline and evolved patterns both converge to a near-zero, uniform voltage).
+
+    The BEST PARAMS example [1.59, 0.75, 1.03] vs baseline [1,1,1] and the MSE numbers.
+
+Figure 6. Evolutionary recovery of a target bioelectric state. A simple genetic algorithm (DEAP) searches 
+parameter space of the single-cell bioelectric model to minimize the error between the final multicell voltage pattern 
+and a target pattern defined by baseline parameters. The best fitness rapidly approaches zero, and a distinct parameter 
+set [1.59,0.75,1.03][1.59,0.75,1.03] reproduces the same uniform stable voltage state as the baseline [1,1,1][1,1,1], 
+illustrating degeneracy in how bioelectric goal states can be realized in parameter space.
