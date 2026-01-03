@@ -1,21 +1,16 @@
 
 
-Title and author list (even if provisional).
+Title and author list.
 
-Abstract (leave as a short placeholder for now).
+Abstract 
 
-Introduction (paste your 4 finished paragraphs).
+Introduction 
 
+Methods
 
+Results 
 
-
-
-
-
-
-Results (paste your results_draft.md).
-
-Discussion (empty, with 3–4 bullet placeholders).
+Discussion 
 
 -Legacy ion-channel drugs as levers on developmental bioelectric networks.
 
@@ -27,6 +22,6 @@ Discussion (empty, with 3–4 bullet placeholders).
 
 
 
-Methods (empty, with bullet placeholders for ODEs, DEAP settings, drugs/data).
+
 
 
