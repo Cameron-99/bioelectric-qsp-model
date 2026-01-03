@@ -19,7 +19,7 @@ margin = 0.05 * (ymax - ymin) if ymax > ymin else 0.1 * abs(ymax or 1.0)
 plt.ylim(ymin - margin, ymax + margin)
 # ---- end inserted block ----
 
-plt.title("Optimization restores tissue pattern\nunder drug perturbation")
+plt.title("Optimization restores the tissue pattern\nunder drug perturbation")
 plt.legend()
 plt.tight_layout()
 plt.savefig("figure6_patterns.png", dpi=300)

@@ -12,59 +12,58 @@ def bioelectric_model(y, t, k1, k2, k3):
 t = np.linspace(0, 50, 1000)
 
 # Baseline (no drug)
-y0 = [1, 1]  # X=1, V=1
+y0 = [1, 1]  # X=1, V=1 (normalized)
 sol_baseline = odeint(bioelectric_model, y0, t, args=(1, 0.1, 0.01))
 
 # Drug perturbation (k3 blocker - 90% inhibition)
 sol_drug = odeint(bioelectric_model, y0, t, args=(1, 0.1, 0.001))
 
-# Plot
+# PLOT FIGURE 1 - FIXED Y-AXIS + LEGEND
 plt.figure(figsize=(6, 4))
-
-plt.plot(t, sol_baseline[:, 1], label='No drug (k3 = 0.01)')
-plt.plot(t, sol_drug[:, 1], 'r--', label='Channel blocker (k3 = 0.001)')
-
+plt.plot(t, sol_baseline[:, 1], 'k-', linewidth=2, label='Baseline (k₃ = 0.01)')
+plt.plot(t, sol_drug[:, 1], 'r--', linewidth=2, label='Channel blocker (k₃ = 0.001)')
 plt.xlabel('Time (arbitrary units)')
-plt.ylabel('Membrane potential (mV)')
-plt.title('Single-cell voltage over time\nwith and without channel blocker')
-plt.legend()
-
+plt.ylabel('Normalized membrane potential (Vnorm)')  # ✅ FIXED
+plt.title('Single-cell voltage dynamics under channel blockade')  # Polished title
+plt.legend(title='Condition')  # Clean legend
 plt.tight_layout()
-plt.savefig('Figure1_single_cell_time.png')
+plt.savefig('Figure1_single_cell_time_Vnorm.png', dpi=300, bbox_inches='tight')  # New filename
 plt.show()
 
-import numpy as np
-from scipy.integrate import odeint
-import matplotlib.pyplot as plt
+print("✅ Figure 1 updated: Figure1_single_cell_time_Vnorm.png")
 
-def bioelectric_model(y, t, k1, k2, k3):
-    X, V = y
-    dXdt = k1 * V - k2 * X * V
-    dVdt = -k3 * V  # Voltage homeostasis
-    return [dXdt, dVdt]
+# =============================================================================
+# IVERMECTIN STAGE 1: Single-cell dose-response (Supplementary Figure S2)
+# =============================================================================
 
-# Time points
-t = np.linspace(0, 50, 1000)
+print("\n🚀 Running Ivermectin Stage 1: Single-cell dose response...")
 
-# Baseline (no drug)
-y0 = [1, 1]  # X=1, V=1
-sol_baseline = odeint(bioelectric_model, y0, t, args=(1, 0.1, 0.01))
+# Ivermectin: Cl- conductance scaling (hyperpolarizing effect on Vnorm)
+cl_scales = np.logspace(-1, 0.7, 8)  # 0.1x to 5x Cl conductance
+steady_states = []
 
-# Drug perturbation (k3 blocker - 90% inhibition)
-sol_drug = odeint(bioelectric_model, y0, t, args=(1, 0.1, 0.001))
+for i, cl_scale in enumerate(cl_scales):
+    # Simulate ivermectin as k3 increase (Cl- hyperpolarization pulls V toward 0)
+    sol_ivm = odeint(bioelectric_model, y0, t, args=(1, 0.1, 0.01 * cl_scale))
+    v_steady = sol_ivm[-1, 1]  # Final Vnorm
+    steady_states.append(v_steady)
+    print(f"Cl scale {cl_scale:.2f}x → Vnorm = {v_steady:.3f}")
 
-# Plot
-plt.figure(figsize=(10, 4))
-plt.subplot(1,2,1)
-plt.plot(t, sol_baseline[:,1], label='Baseline V')
-plt.xlabel('Time'); plt.ylabel('Voltage'); plt.title('No Drug'); plt.legend()
+# Save data (safe filename)
+np.save('ivermectin_stage1_dose_response.npy', np.array([cl_scales, steady_states]))
 
-plt.subplot(1,2,2)
-plt.plot(t, sol_drug[:,1], 'r--', label='Drug (k3 blocked)')
-plt.xlabel('Time'); plt.ylabel('Voltage'); plt.title('90% Channel Blocker'); plt.legend()
+# Plot dose-response (Figure S2 style)
+plt.figure(figsize=(6, 4))
+plt.semilogx(cl_scales, steady_states, 'mo-', linewidth=2, markersize=8, 
+             label='Ivermectin-like Cl⁻ scaling')
+plt.xlabel('Chloride conductance scale (× baseline)')
+plt.ylabel('Steady-state Vnorm')
+plt.title('Ivermectin-like single-cell dose response')
+plt.grid(True, alpha=0.3)
 plt.tight_layout()
-plt.xlabel("Amiloride concentration (log10 M)")
-plt.ylabel("Membrane potential (mV)")
-plt.title("Effect of amiloride (Na⁺ channel blocker) on single-cell voltage")
-plt.savefig('Figure_1.png, dpi=300')
+plt.savefig('ivermectin_stage1_dose_response.png', dpi=300, bbox_inches='tight')
 plt.show()
+
+print("✅ Ivermectin Stage 1 complete:")
+print("   → ivermectin_stage1_dose_response.npy")
+print("   → ivermectin_stage1_dose_response.png")
