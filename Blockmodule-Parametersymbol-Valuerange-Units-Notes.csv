@@ -1,0 +1,24 @@
+Block / module,Parameter (symbol),Value / range,Units,Notes
+Biophysical scaling,Vmem baseline,-40,mV,Typical non-excitable cell resting potential
+Biophysical scaling,Perturbation range,±10–20,mV,"Drug-induced shifts, bioelectric signaling scale"
+Biophysical scaling,Vnorm,Vnorm = (Vmem + 40 mV) / 20 mV,–,"Centers baseline at 0, spans perturbations ±0.5–1.0"
+Single-cell bioelectric model,"State variables (X,V)",dX/dt = k₁V − k₂XV; dV/dt = −k₃V,"mV,s⁻¹","Minimal two-variable ODE: X=signaling, V=membrane potential (−40 mV baseline)"
+Single-cell bioelectric model,"Rate constants k₁,k₂,k₃",k₃ ≈ 0.01 baseline,s⁻¹,"Timescale minutes-hours, matching ion flux dynamics"
+Single-cell bioelectric model,Time window t,"0–100 (2000 points, linspace)",arbitrary,Maps to ∼1-2 hours physiological time
+Single-cell bioelectric model,"Initial condition [X₀,V₀]","[0,−40]",mV,Uniform initial state for all cells
+Ivermectin Stage 2 tissue,Tissue size N×N,10×10,cells,Regular 2D grid with gap-junction coupling
+Ivermectin Stage 2 tissue,Ivermectin factor f_ivm,2.0 (left half of tissue),–,Models 2× increase of effective chloride pathway (via k₃ scaling)
+Ivermectin Stage 2 tissue,Baseline k₃ scaling,Left: 0.01×2.0×k₃; Right: 0.01×k₃,–,Fixed ivermectin-like perturbation on left half
+Ivermectin Stage 3 evolution,Individual encoding,"[k₁, k₂, k₃]",s⁻¹,Length-3 real-valued vector of ODE parameters
+Ivermectin Stage 3 evolution,Parameter bounds,"k₁,k₂,k₃ ∼ Uniform(0.5,2.0)",× baseline s⁻¹,Initialization/mutation bounds preserve physiological rates
+Ivermectin Stage 3 evolution,Fitness function,MSE between evolved V pattern and target,–,Steady-state Vmem patterns (mV) under 2× ivermectin
+Ivermectin Stage 3 evolution,Crossover operator,cxBlend with α = 0.5,–,Blend crossover on real-valued genes
+Ivermectin Stage 3 evolution,Mutation operator,"mutGaussian with μ = 0, σ = 0.2, indpb = 0.2",–,Gaussian perturbation per gene (prob. 0.2)
+Ivermectin Stage 3 evolution,Selection operator,"Tournament selection, tournsize = 3",–,Standard DEAP tournament selection
+Propranolol PK (Figure 5),PK model,dC/dt = −k_e C,"µg/L,h","One-compartment, first-order elimination"
+Propranolol PK (Figure 5),Elimination rate k_e,0.231,h⁻¹,Hours-scale decay consistent with propranolol PK
+Propranolol PK (Figure 5),Dose D,80 000,µg,Single notional oral-equivalent dose (80 mg)
+Propranolol PK (Figure 5),Bioavailability F,0.26,–,Fraction reaching systemic circulation
+Propranolol PK (Figure 5),Volume of distribution V_d,5.11 L/kg × 70 kg ≈ 358,L,Approximate V_d for 70 kg subject
+Propranolol PK (Figure 5),Initial concentration C₀,C₀ = F D / V_d,µg/L,Starting plasma concentration at t=0
+Propranolol PK (Figure 5),PK time window t,"0–24 (100 points, linspace)",h,24-hour window to capture rise/decay
