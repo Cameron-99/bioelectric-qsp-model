@@ -1,8 +1,6 @@
 2.1 Figures 1–2
 
-    Drug–channel interactions reproduce expected 1980s pharmacology at the single-cell level.
-    Using a simple ODE model for [ion channels / membrane voltage], classical drugs such as amiloride reproduce the expected changes in current 
-and steady-state voltage as a function of dose, consistent with their original 1980s mechanisms. The model also captures a smooth log–dose response 
+    and steady-state voltage as a function of dose, consistent with their original 1980s mechanisms. The model also captures a smooth log–dose response 
 for amiloride using PubChem IC50 values, anchoring the rest of the pipeline in real pharmacology data.
 
 2.2 Figures 3–4
