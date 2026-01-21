@@ -33,3 +33,14 @@ Citation
   journal = {bioelectric-qsp-model},
   doi = {10.5281/zenodo.XXXXXXX}
 }
+Related Work
+
+    Tufts Levin Lab bioelectricity
+
+    ​
+
+    BETSE neuroepithelium optimization (sister repo)
+
+    HCN2 somite patterning (93% recovery demonstrated)
+
+License: MIT. Contact: cameron.mcculloch@gmx.at
