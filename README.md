@@ -26,8 +26,9 @@ seaborn pandas jupyter  # plot_figure6.py
 
 Citation
 @misc{cameron2026bioelectricqsp,
-  title = {Bioelectric QSP Model: Ion Channel Drug Simulations},
-  author = {McCulloch, CR},
+  title = Legacy Ion-Channel Drugs as Controllers of Tissue
+  Bioelectric Goal States,
+  author = CR McCulloch, PhD,
   year = {2026},
   publisher = {GitHub},
   journal = {bioelectric-qsp-model},
@@ -43,4 +44,4 @@ Related Work
 
     HCN2 somite patterning (93% recovery demonstrated)
 
-License: MIT. Contact: cameron.mcculloch@gmx.at
+Contact: cameron.mcculloch@gmx.at
