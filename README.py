@@ -1,3 +1,10 @@
+
+Every cell has tiny electrical channels that control its voltage, and together these voltages form patterns across tissues that guide how organs grow and repair. This study used a computer model to test whether older, 
+well-known drugs that affect these channels — such as amiloride and ivermectin — could be repurposed to steer those tissue-wide voltage patterns. Using an evolutionary optimization approach, the model showed 
+that tissues could, in principle, recover their target electrical patterns even after being disrupted by drugs. The work suggests that legacy drugs might one day be used to guide tissue regeneration or growth by 
+controlling bioelectric "goal states" — essentially steering the body's electrical instructions.
+
+
 # Bioelectric Evolution: Ivermectin-Induced Patterning
 
 **Computational modeling of evolutionary optimization for bioelectric signaling toward ivermectin-like asymmetric membrane potential patterns across 3 stages: single-cell ODE → tissue simulation → parameter evolution.**
@@ -76,3 +83,6 @@ Convergence: ~150 generations
 Cameron R. McCulloch, PhD
 Veterinarian, Pharmacologist
 Vienna, AT • vet19@gmx.at • [ORCID] 0009-0001-3517-7864
+
+https://doi.org/10.1177/25763113261459408
+
